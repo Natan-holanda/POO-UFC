@@ -1,84 +1,82 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
 int i;
-bool existe(int vetp[6], int x) {
+bool existe(vector<int> pessoas, int x) {
  for(i = 0; i < 6; i++){
-    if(vetp[i] == x){
-    return true;
-    break;
-  }
+   if( pessoas[i] == x)
+   return true;
 }
  return false;
 }
-int contar(int vet[6], int x) {
-int cont = 0;
- for(i = 0; i < 6; i++){
-   if(vet[i] == x) cont++;
+int contar(vector<int> pessoas, int x) {
+int cont { 0 };
+ for(i = 0; i < (int) pessoas.size(); i++){
+   if(pessoas[i] == x) cont++;
  }
  return cont;
 }
-int procura_valor(int vet[6], int x) {
+int procura_valor(vector<int> pessoas, int x) {
 int l;
- for(i = 0; i < 6; i++){
-   if(vet[i] == x){
+ for(i = 0; i < (int) pessoas.size(); i++){
+   if(pessoas[i] == x){
    return i;
-   break;
    }
  }
  return -1;
 }
-int procurar_valor_apartir(int vet[6], int x, int inicio){
-  for( i = inicio; i < 6; i++){
-     if(vet[i] == x){
+int procurar_valor_apartir(vector<int> pessoas, int x, int inicio){
+  for( i = inicio; i < pessoas.size(); i++){
+     if(pessoas[i] == x){
      return i;
-      break;
      }
   }
   return -1;
 }
-int procurar_menor(int vet[6]) {
-int menor = vet[0];
-  for(i = 0; i < 6; i++){
-    if(vet[i] < menor) menor = vet[i];
+int procurar_menor(vector<int> pessoas) {
+int menor {pessoas[0]};
+  for(i = 0; i < (int) pessoas.size(); i++){
+    if(pessoas[i] < menor) menor = pessoas[i];
     }
  return menor;
 }
-int procurar_menor_pos(int vet[6]){
-int mpos = 0;
+int procurar_menor_pos(vector<int> pessoas){
+int mpos { 0 };
  for(i = 0; i < 6; i++){
-   if(vet[mpos] < vet[i]) mpos = i;
+   if(pessoas[mpos] < pessoas[i]) mpos = i;
     }
  return mpos;
 }
-int procurar_menor_pos_apartir(int vet[6], int inicio){
- int menor = vet[inicio];
- for(i = inicio; i < 6; i++){
-   if(menor < vet[i]) menor = vet[i];
+int procurar_menor_pos_apartir(vector<int> pessoas, int inicio){
+int menor {pessoas[inicio]};
+
+ for(i = inicio; i < (int) pessoas.size(); i++){
+   if(menor < pessoas[i]) menor = pessoas[i];
  }
  return menor;
 }
-int procurar_melhor_se(int vet[6]){
-int menor = 1000;
- for(i = 0; i < 6; i++){
-   if(vet[i] < menor && vet[i] > 0) menor = vet[i];
+int procurar_melhor_se(vector<int> pessoas){
+int menor { 1000 };
+ for(i = 0; i < (int)pessoas.size(); i++){
+   if(pessoas[i] < menor && pessoas[i] > 0) menor = pessoas[i];
  }
  if(menor == 1000) return -1;
  else{
   return menor;
  }
  }
-int stress_medio(int vet[6]) {
-double medio = 0;
- for(i = 0; i < 6; i++){
-   medio += abs(vet[i]);
+int stress_medio(vector<int> pessoas) {
+double medio { 0 };
+ for(i = 0; i < (int) pessoas.size(); i++){
+   medio += abs(pessoas[i]);
  }
  medio /= 6;
  return medio;
 }
-string mais_homens_ou_mulheres(int vet[6]){
-int conth = 0, contm = 0;
-  for(i = 0; i < 6; i++){
-   if(vet[i] > 0) conth++;
+string mais_homens_ou_mulheres(vector<int> pessoas){
+int conth { 0 }, contm { 0 };
+  for(i = 0; i < (int) pessoas.size(); i++){
+   if(pessoas[i] > 0) conth++;
    else{
    contm++;
    }
@@ -94,50 +92,46 @@ int conth = 0, contm = 0;
   return ("empate");
   }
 }
-string qual_metade_eh_mais_estressada(int vet[6]){
+string qual_metade_eh_mais_estressada(vector<int> pessoas){
 int m1 = 0, m2 = 0;
-for(i = 0; i < 6; i++){
+for(i = 0; i < (int)pessoas.size(); i++){
  if(i <= 3){
-   m1 += abs(vet[i]);
+   m1 += abs(pessoas[i]);
  }else{
-   m2 += abs(vet[i]);
+   m2 += abs(pessoas[i]);
  }
 }
- if(m1 > m2)
- {
+ if(m1 > m2){
  return ("primeira");
- }else if(m1 < m2)
- {
+ }else if(m1 < m2){
  return ("segunda");
- }else
- {
+ }else{
  return ("empate");
  }
 }
-string homens_sao_mais_estressados_que_mulheres(int vet[5]){
+string homens_sao_mais_estressados_que_mulheres(vector<int> pessoas){
 int mediah = 0, mediam = 0, conth = 0, contm = 0;
- for(i = 0; i < 5; i++ ){
-   if(vet[i] < 0){
-   mediam += abs(vet[i]);
+ for(i = 0; i < (int)pessoas.size(); i++ ){
+   if(pessoas[i] < 0){
+   mediam += abs(pessoas[i]);
    contm++;
    }else{
-   mediah += abs(vet[i]);
+   mediah += abs(pessoas[i]);
    conth++;
    }
  }
- if((mediam / contm) > (mediah / conth))
- {
+ if((mediam / contm) > (mediah / conth)){
  return ("não");
- }else if((mediam / contm) == (mediah / conth))
- {
+
+ }else if((mediam / contm) == (mediah / conth)){
  return ("são iguais");
- }else
- {
+ }else{
  return ("sim");
  }
 }
 int main(){
-int pessoas[] = {-51, 99, 1, -50, -1, -99}, x ;
+ vector <int> pessoas = {-51, 99, 1, -50, -1, -99};
+int  x ;
  cout << "O vetor é :";
  for(i = 0; i < 6; i++) cout << pessoas[i] <<" ";
  cout <<"\n\n";
